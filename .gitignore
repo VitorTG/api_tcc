@@ -68,7 +68,7 @@ target/
 .python-version
 
 # Environments
-.env
+*.env
 
 # Spyder project settings
 .spyderproject
