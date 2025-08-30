@@ -1,0 +1,21 @@
+{
+  "title": "incoming_user",
+  "type": "object",
+  "properties": {
+    "user_name": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 255
+    },
+    "password": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 255
+    }
+  },
+  "required": [
+    "user_name",
+    "password"
+  ],
+  "additionalProperties": false
+}

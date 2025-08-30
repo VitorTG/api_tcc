@@ -1,0 +1,38 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: api_tcc:latest
+    container_name: api-tcc
+    ports:
+      - "3000:3000"
+    env_file: local.env
+    volumes:
+      - ./src:/app
+    command: sh -c "gunicorn -c config.py -w 1 -b 0.0.0.0:3000 app --reload"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=my_user
+      - POSTGRES_PASSWORD=my_pwd
+      - POSTGRES_DB=my_db
+    ports:
+      - "5432:5432"
+
+  localstack:
+    image: localstack/localstack:3.0.2
+    container_name: localstack
+    ports:
+      - "4566:4566"
+      - "8080:8080"
+    environment:
+      - SERVICES=secretsmanager,sqs
+      - DEBUG=1
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"

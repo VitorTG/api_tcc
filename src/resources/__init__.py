@@ -1,0 +1,3 @@
+from resources.weather_resource import WeatherResource
+from resources.health_check import HealthCheckResource
+from resources.user_resource import UserResource
